@@ -10,7 +10,8 @@
   group:
     name: "{{ item }}"
     state: present
-  loop: '{{ groupsss }}'
+  loop: '{{ groups_list }}'
+  when: groups_list| length > 0
   
 
 
@@ -42,4 +43,5 @@
     uid: "{{ item.value.uid | default(omit) }}"
     update_password: "{{ item.value.update_password | default(omit) }}"
   loop: "{{  lookup('ansible.builtin.dict', user_list, wantlist=True) }}"
+  when: item.value.name is defined
   

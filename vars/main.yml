@@ -1,15 +1,12 @@
 ---
 # vars file for new_os
-groupsss: ['admin', 'backup', 'devops', 'admin']
+groups_list: []
 
-user_list:
-  backup:
-    name: 'backup'
-    shell: /bin/bash
-    groups:
-      - 'backup'
-  adm-rkendzia:
-    name: adm-rkendzia
-    groups :
-      - 'admin'
-    shell: /bin/bash
+# user_list:
+#   backup:
+#     name: 
+#     shell: 
+#     groups:
+      
+      
+  
