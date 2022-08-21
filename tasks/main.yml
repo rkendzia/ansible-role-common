@@ -1,7 +1,7 @@
 ---
 # # tasks file for new_os
 - name: configure by default(omit) }}"
-  import_tasks: rocket.yml
+  import_tasks: setup_rocky.yml
   when: ansible_os_family == "RedHat"
 
 
@@ -43,3 +43,4 @@
     update_password: "{{ item.value.update_password | default(omit) }}"
   loop: "{{  lookup('ansible.builtin.dict', user_list, wantlist=True) }}"
   
+qaqa
