@@ -1,0 +1,20 @@
+---
+- name: configure rocket.yml
+  include_vars: "rocket.yml"
+  
+   
+
+- name: update os of rocky linux
+  dnf:
+    name: "*"
+    state: latest
+
+- name: Install package epel
+  dnf:
+    name: epel-release
+    state: present
+
+- name: Install package of rocket.yml
+  dnf:
+    name: "{{ common }}"
+    state: present

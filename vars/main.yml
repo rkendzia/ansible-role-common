@@ -1,0 +1,3 @@
+---
+# vars file for new_os
+groupsss: ['admin', 'compta', 'devops']

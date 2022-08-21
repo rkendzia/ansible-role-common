@@ -1,0 +1,24 @@
+---
+# # tasks file for new_os
+- name: configure by default multi OS
+  import_tasks: rocket.yml
+  when: ansible_os_family == "RedHat"
+
+
+  
+- name: create groups
+  # include_vars: "groups.yml"
+  group:
+    name: "{{ item }}"
+    state: present
+  loop: '{{ groupsss }}'
+  
+
+
+
+- name: Create users
+  user:
+    name: raf
+    shell: /bin/bash
+    groups: admin
+    append: yes
