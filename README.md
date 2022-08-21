@@ -1,7 +1,7 @@
-Role Name
+Common Configuration for multiple OS
 =========
 
-A brief description of the role goes here.
+This ansible configure users, groups, firewall, packages, ... for nes installations
 
 Requirements
 ------------
