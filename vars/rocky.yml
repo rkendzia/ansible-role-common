@@ -1,2 +1,20 @@
 ---
-common: ['vim', 'curl', 'htop', 'git']
+#common: ['vim', 'curl', 'htop', 'git']
+common: []
+
+#define epel to false if you don't need of repo epel-release
+epel: true
+
+#examples
+#firewall:
+  # ssh:
+    # service: http
+    # permanent: yes
+    # state: enabled
+firewall:
+  ssh:
+    service: http
+    permanent: yes
+    state: enabled
+ 
+    

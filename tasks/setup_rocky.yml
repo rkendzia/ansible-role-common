@@ -1,6 +1,7 @@
 ---
 - name: configure rocket.yml
-  include_vars: "rocket.yml"
+  include_vars: "rocky.yml"
+  
   
    
 
@@ -13,8 +14,25 @@
   dnf:
     name: epel-release
     state: present
+  when: epel == true
 
-- name: Install package of rocket.yml
+- name: Install package of rocky.yml
   dnf:
     name: "{{ common }}"
     state: present
+  when: common | length > 0
+  
+  
+
+- name: configure firewalls for rocky linux
+  ansible.posix.firewalld:
+    zone: '{{ item.value.zone | default(omit) }}'
+    service: '{{ item.value.service| default(omit) }}'
+    port: '{{ item.value.port| default(omit) }}'
+    state: '{{ item.value.state | default(omit) }}'
+    interface: '{{ item.value.interface | default(omit) }}'
+    permanent:  '{{ item.value.permanent | default(omit) }}'
+  loop: "{{  lookup('ansible.builtin.dict', firewall, wantlist=True) }}"
+  when: firewall is defined
+
+ 

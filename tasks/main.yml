@@ -43,4 +43,3 @@
     update_password: "{{ item.value.update_password | default(omit) }}"
   loop: "{{  lookup('ansible.builtin.dict', user_list, wantlist=True) }}"
   
-qaqa
