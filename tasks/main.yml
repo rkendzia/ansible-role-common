@@ -1,13 +1,12 @@
 ---
 # # tasks file for new_os
-- name: configure by default multi OS
+- name: configure by default(omit) }}"
   import_tasks: rocket.yml
   when: ansible_os_family == "RedHat"
 
 
   
 - name: create groups
-  # include_vars: "groups.yml"
   group:
     name: "{{ item }}"
     state: present
@@ -15,10 +14,32 @@
   
 
 
-
-- name: Create users
+- name: create users
   user:
-    name: raf
-    shell: /bin/bash
-    groups: admin
-    append: yes
+    append: "{{ item.value.append | default(omit) }}"
+    comment: "{{ item.value.comment | default(omit) }}"
+    createhome: "{{ item.value.createhome | default(omit) }}"
+    expires: "{{ item.value.expires | default(omit) }}"
+    force: "{{ item.value.force | default(omit) }}"
+    generate_ssh_key: "{{ item.value.generate_ssh_key | default(omit) }}"
+    group: "{{ item.value.group | default(omit) }}"
+    groups: "{{ item.value.groups|join(',') if item.value.groups is defined else omit }}"
+    home: "{{ item.value.home | default(omit) }}"
+    login_class: "{{ item.value.login_class | default(omit) }}"
+    move_home: "{{ item.value.move_home | default(omit) }}"
+    name: "{{ item.value.name }}"
+    non_unique: "{{ item.value.non_unique | default(omit) }}"
+    password: "{{ item.value.password | default(omit) }}"
+    remove: "{{ item.value.remove | default(omit) }}"
+    shell: "{{ item.value.shell | default(omit) }}"
+    ssh_key_bits: "{{ item.value.ssh_key_bits | default(omit) }}"
+    ssh_key_comment: "{{ item.value.ssh_key_comment | default(omit) }}"
+    ssh_key_file: "{{ item.value.ssh_key_file | default(omit) }}"
+    ssh_key_passphrase: "{{ item.value.ssh_key_passphrase | default(omit) }}"
+    ssh_key_type: "{{ item.value.ssh_key_type | default(omit) }}"
+    state: "{{ item.value.state | default(omit) }}"
+    system: "{{ item.value.system | default(omit) }}"
+    uid: "{{ item.value.uid | default(omit) }}"
+    update_password: "{{ item.value.update_password | default(omit) }}"
+  loop: "{{  lookup('ansible.builtin.dict', user_list, wantlist=True) }}"
+  
